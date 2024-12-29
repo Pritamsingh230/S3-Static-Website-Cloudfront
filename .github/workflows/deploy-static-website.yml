@@ -43,9 +43,9 @@ jobs:
           fi
 
       # Step 4: Sync the contents to S3
-      - name: Sync files to S3
-        run: |
-          aws s3 sync . s3://project-s3-bucket-2test33-test3/ --exclude ".git/*" --exclude ".github/*" --exclude "README.md" --exclude "deploy-static-website.yml" --acl public-read
+      #- name: Sync files to S3
+       # run: |
+        #  aws s3 sync . s3://project-s3-bucket-2test33-test3/ --exclude ".git/*" --exclude ".github/*" --exclude "README.md" --exclude "deploy-static-website.yml" --acl public-read
           
       # Step 5: Invalidate CloudFront cache
       - name: Invalidate CloudFront cache
