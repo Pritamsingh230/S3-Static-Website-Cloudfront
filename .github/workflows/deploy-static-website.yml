@@ -29,12 +29,18 @@ jobs:
           role-to-assume: arn:aws:iam::445567102851:role/git-action-role
           aws-region: us-east-1
 
-      # Step 3: Install AWS CLI
-      - name: Install AWS CLI
+      # Step 3: Check if AWS CLI is installed, if not install it
+      - name: Check AWS CLI installation
         run: |
-          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-          unzip awscliv2.zip
-          sudo ./aws/install
+          if ! command -v aws &> /dev/null
+          then
+            echo "AWS CLI not found, installing..."
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip awscliv2.zip
+            sudo ./aws/install
+          else
+            echo "AWS CLI is already installed"
+          fi
 
       # Step 4: Sync the contents to S3
       - name: Sync files to S3
